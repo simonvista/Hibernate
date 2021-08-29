@@ -1,7 +1,12 @@
 package com.telusko.hibernate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 //POJO
+@Entity
 public class Alien {
+	@Id
 	private int aid;
 	private String aname;
 	private String color;
