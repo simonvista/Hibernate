@@ -15,26 +15,27 @@ public class App
 {
     public static void main( String[] args )
     {
-    	Alien telusko=new Alien();		
-		telusko.setAid(101); 
-		AlienName an=new AlienName();
-		an.setFname("Amy");
-		an.setLname("Duke");
-		an.setMname("Kaven");
-		telusko.setAname(an); 
-		telusko.setColor("white");		 
+    	Laptop laptop=new Laptop();
+    	laptop.setLid(101);
+		laptop.setLname("Dell");
+		Student student=new Student();
+		student.setName("Amy");
+		student.setRollno(101);
+		student.setMarks(50);
+		
         Configuration cfg=new Configuration().configure()	//hibernate.cfg.xml is default configure file 
-        									 .addAnnotatedClass(Alien.class);    
+        									 .addAnnotatedClass(Student.class)
+        									 .addAnnotatedClass(Laptop.class);    
         ServiceRegistry sr=new ServiceRegistryBuilder().applySettings(cfg.getProperties())
         											   .buildServiceRegistry();
         //SessionFactory sf=cfg.buildSessionFactory();
         SessionFactory sf=cfg.buildSessionFactory(sr);
         Session session=sf.openSession();
         //must begin transaction, otherwise no table created
-        Transaction tx= session.beginTransaction();
-        session.save(telusko);
-        telusko=(Alien) session.get(Alien.class, 101);
-        tx.commit();
-        System.out.println(telusko.toString());
+        session.beginTransaction();
+        session.save(laptop);
+        session.save(student);
+        session.getTransaction().commit();
+        
     }
 }
