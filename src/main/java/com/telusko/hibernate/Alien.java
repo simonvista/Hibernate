@@ -4,7 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 //POJO
-@Entity
+//entity and table names will be aliens
+@Entity(name = "aliens")
 public class Alien {
 	@Id
 	private int aid;

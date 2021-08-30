@@ -16,7 +16,7 @@ public class App
     public static void main( String[] args )
     {
         Alien telusko=new Alien();
-        telusko.setAid(102);
+        telusko.setAid(101);
         telusko.setAname("Amy");
         telusko.setColor("red");
         Configuration cfg=new Configuration().configure()	//hibernate.cfg.xml is default configure file 
