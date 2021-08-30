@@ -3,6 +3,7 @@ package com.telusko.hibernate;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -33,10 +34,22 @@ public class App
         Session session1=sf.openSession();
         //must begin transaction, otherwise no table created
         session1.beginTransaction();
-        a=(Alien) session1.get(Alien.class, 101);        
+        
+//      2nd-level cache w/ query        
+        Query q1=session1.createQuery("from Alien where aid=101");
+        q1.setCacheable(true);
+        a=(Alien) q1.uniqueResult();      
+        
+//        a=(Alien) session1.get(Alien.class, 101);        
         System.out.println(a);
       //1st-level caching (provided by Hibernate by default) -> same query was run only once in the same session
-        a=(Alien) session1.get(Alien.class, 101);
+//        a=(Alien) session1.get(Alien.class, 101);
+        
+//      2nd-level cache w/ query        
+        Query q2=session1.createQuery("from Alien where aid=101");
+        q2.setCacheable(true);
+        a=(Alien) q2.uniqueResult();      
+       
         System.out.println(a);
         session1.getTransaction().commit();
         session1.clear();
