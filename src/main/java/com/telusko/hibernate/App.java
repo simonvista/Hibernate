@@ -14,6 +14,7 @@ public class App
 {
     public static void main( String[] args )
     {
+    	Alien a=null;
 //		Alien a1=new Alien();
 //		a1.setAname("Navin");
 //		a1.setAid(101);
@@ -24,29 +25,30 @@ public class App
 //		l1.setPrice(600);
 //		a1.getLaptops().add(l1);
         Configuration cfg=new Configuration().configure()	//hibernate.cfg.xml is default configure file         									 
-        									 .addAnnotatedClass(Laptop.class)
         									 .addAnnotatedClass(Alien.class);    
         ServiceRegistry sr=new ServiceRegistryBuilder().applySettings(cfg.getProperties())
         											   .buildServiceRegistry();
         //SessionFactory sf=cfg.buildSessionFactory();
         SessionFactory sf=cfg.buildSessionFactory(sr);
-        Session session=sf.openSession();
+        Session session1=sf.openSession();
         //must begin transaction, otherwise no table created
-        session.beginTransaction();
+        session1.beginTransaction();
+        a=(Alien) session1.get(Alien.class, 101);        
+        System.out.println(a);
+      //1st-level caching (provided by Hibernate by default) -> same query was run only once in the same session
+        a=(Alien) session1.get(Alien.class, 101);
+        System.out.println(a);
+        session1.getTransaction().commit();
+        session1.clear();
         
-        //save order matters
-//        session.save(a1);
-//        session.save(l1);
-//        Lazy fetch is by default -> get alien won't get laptop by default
-        Alien a1=(Alien)session.get(Alien.class, 1);        
-        System.out.println(a1.getAname());
-        System.out.println(a1.getAid());
-        Collection<Laptop> laptops=a1.getLaptops();
-        for(Laptop l:laptops) {
-        	System.out.println(l);
-        }
-        
-        session.getTransaction().commit();
-        
+//        new session
+        Session session2=sf.openSession();
+        session2.beginTransaction();
+//        same query will be run in different session
+        a=(Alien) session2.get(Alien.class, 101);        
+        System.out.println(a);
+        session2.getTransaction().commit();
+        session2.clear();
+//        2nd-level caching (3rd party apps, e.g. ehcache) will solve this issue in different session
     }
 }

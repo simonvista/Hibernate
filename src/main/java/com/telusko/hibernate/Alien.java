@@ -14,14 +14,12 @@ import javax.persistence.Transient;
 //POJO
 //only table names will be aliens
 @Entity
-//@Table(name="alien_table")
+@Table(name="alien_table")
 public class Alien {
 	@Id
 	private int aid;
 	private String aname;
-	//lazy fetch by default
-	@OneToMany(mappedBy = "alien",fetch = FetchType.EAGER)
-	private Collection<Laptop> laptops=new ArrayList<>();
+	private String color;
 	
 	public int getAid() {
 		return aid;
@@ -36,17 +34,15 @@ public class Alien {
 	public void setAname(String aname) {
 		this.aname = aname;
 	}
-	
-	public Collection<Laptop> getLaptops() {
-		return laptops;
+	public String getColor() {
+		return color;
 	}
-	public void setLaptops(Collection<Laptop> laptops) {
-		this.laptops = laptops;
+	public void setColor(String color) {
+		this.color = color;
 	}
 	@Override
 	public String toString() {
-		return "Alien [aid=" + aid + ", aname=" + aname + "]";
-	}
-	
+		return "Alien [aid=" + aid + ", aname=" + aname + ", color=" + color + "]";
+	}	
 	
 }
