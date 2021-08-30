@@ -2,6 +2,7 @@ package com.telusko.hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Student {
@@ -9,6 +10,8 @@ public class Student {
 	private int rollno;
 	private String name;
 	private int marks;
+	@OneToOne
+	private Laptop laptop;
 	public int getRollno() {
 		return rollno;
 	}
@@ -26,6 +29,13 @@ public class Student {
 	}
 	public void setMarks(int marks) {
 		this.marks = marks;
+	}
+	
+	public Laptop getLaptop() {
+		return laptop;
+	}
+	public void setLaptop(Laptop laptop) {
+		this.laptop = laptop;
 	}
 	@Override
 	public String toString() {

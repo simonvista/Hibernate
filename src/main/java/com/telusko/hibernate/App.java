@@ -22,6 +22,7 @@ public class App
 		student.setName("Amy");
 		student.setRollno(101);
 		student.setMarks(50);
+		student.setLaptop(laptop);
 		
         Configuration cfg=new Configuration().configure()	//hibernate.cfg.xml is default configure file 
         									 .addAnnotatedClass(Student.class)
