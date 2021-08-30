@@ -17,8 +17,8 @@ public class App
     {
         Alien telusko=new Alien();
         telusko.setAid(102);
-        telusko.setAname("Mike");
-        telusko.setColor("blue");
+        telusko.setAname("Amy");
+        telusko.setColor("red");
         Configuration cfg=new Configuration().configure()	//hibernate.cfg.xml is default configure file 
         									 .addAnnotatedClass(Alien.class);    
         ServiceRegistry sr=new ServiceRegistryBuilder().applySettings(cfg.getProperties())
