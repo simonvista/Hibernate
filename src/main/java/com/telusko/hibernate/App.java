@@ -15,11 +15,14 @@ public class App
 {
     public static void main( String[] args )
     {
-    	Alien telusko=null;
-//      Alien telusko=new Alien();		
-//		telusko.setAid(102); 
-//		telusko.setAname("Bob"); 
-//		telusko.setColor("black");		 
+    	Alien telusko=new Alien();		
+		telusko.setAid(101); 
+		AlienName an=new AlienName();
+		an.setFname("Amy");
+		an.setLname("Duke");
+		an.setMname("Kaven");
+		telusko.setAname(an); 
+		telusko.setColor("white");		 
         Configuration cfg=new Configuration().configure()	//hibernate.cfg.xml is default configure file 
         									 .addAnnotatedClass(Alien.class);    
         ServiceRegistry sr=new ServiceRegistryBuilder().applySettings(cfg.getProperties())
@@ -29,7 +32,7 @@ public class App
         Session session=sf.openSession();
         //must begin transaction, otherwise no table created
         Transaction tx= session.beginTransaction();
-        //session.save(telusko);
+        session.save(telusko);
         telusko=(Alien) session.get(Alien.class, 101);
         tx.commit();
         System.out.println(telusko.toString());

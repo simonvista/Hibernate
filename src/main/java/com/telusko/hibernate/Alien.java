@@ -13,10 +13,8 @@ import javax.persistence.Transient;
 public class Alien {
 	@Id
 	private int aid;
-	//aname is not to be persisted or ignore fields to save in the DB
-	//@Transient
-	private String aname;
-	@Column(name = "alien_color")
+	//call embedded obj
+	private AlienName aname;
 	private String color;
 	public int getAid() {
 		return aid;
@@ -24,10 +22,11 @@ public class Alien {
 	public void setAid(int aid) {
 		this.aid = aid;
 	}
-	public String getAname() {
+	
+	public AlienName getAname() {
 		return aname;
 	}
-	public void setAname(String aname) {
+	public void setAname(AlienName aname) {
 		this.aname = aname;
 	}
 	public String getColor() {
