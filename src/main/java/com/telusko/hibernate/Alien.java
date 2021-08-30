@@ -1,21 +1,28 @@
 package com.telusko.hibernate;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 //POJO
 //only table names will be aliens
 @Entity
-@Table(name="alien_table")
+//@Table(name="alien_table")
 public class Alien {
 	@Id
 	private int aid;
-	//call embedded obj
-	private AlienName aname;
-	private String color;
+	private String aname;
+	//lazy fetch by default
+	@OneToMany(mappedBy = "alien",fetch = FetchType.EAGER)
+	private Collection<Laptop> laptops=new ArrayList<>();
+	
 	public int getAid() {
 		return aid;
 	}
@@ -23,21 +30,23 @@ public class Alien {
 		this.aid = aid;
 	}
 	
-	public AlienName getAname() {
+	public String getAname() {
 		return aname;
 	}
-	public void setAname(AlienName aname) {
+	public void setAname(String aname) {
 		this.aname = aname;
 	}
-	public String getColor() {
-		return color;
+	
+	public Collection<Laptop> getLaptops() {
+		return laptops;
 	}
-	public void setColor(String color) {
-		this.color = color;
+	public void setLaptops(Collection<Laptop> laptops) {
+		this.laptops = laptops;
 	}
 	@Override
 	public String toString() {
-		return "Alien [aid=" + aid + ", aname=" + aname + ", color=" + color + "]";
+		return "Alien [aid=" + aid + ", aname=" + aname + "]";
 	}
+	
 	
 }

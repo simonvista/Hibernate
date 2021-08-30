@@ -13,37 +13,37 @@ import javax.persistence.ManyToOne;
 public class Laptop {
 	@Id
 	private int lid;
-	private String lname;
-	
-//	@ManyToOne
-//	private  Student student;
-	
-	@ManyToMany
-	private List<Student> students=new ArrayList<>();
-	
+	private String brand;
+	private int price;	
+	@ManyToOne
+	private Alien alien;
 	public int getLid() {
 		return lid;
 	}
 	public void setLid(int lid) {
 		this.lid = lid;
 	}
-	public String getLname() {
-		return lname;
+	public String getBrand() {
+		return brand;
 	}
-	public void setLname(String lname) {
-		this.lname = lname;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
-//	public Student getStudent() {
-//		return student;
-//	}
-//	public void setStudent(Student student) {
-//		this.student = student;
-//	}
-	public List<Student> getStudents() {
-		return students;
+	public int getPrice() {
+		return price;
 	}
-	public void setStudents(List<Student> students) {
-		this.students = students;
+	public void setPrice(int price) {
+		this.price = price;
 	}
+	public Alien getAlien() {
+		return alien;
+	}
+	public void setAlien(Alien alien) {
+		this.alien = alien;
+	}
+	@Override
+	public String toString() {
+		return "Laptop [lid=" + lid + ", brand=" + brand + ", price=" + price + "]";
+	}	
 		
 }
