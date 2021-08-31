@@ -27,9 +27,15 @@ public class App
         //SessionFactory sf=cfg.buildSessionFactory();
         SessionFactory sf=cfg.buildSessionFactory(sr);
         Session session=sf.openSession();
-        
-        
-//        session.getTransaction().commit();
+        Laptop l=new Laptop();
+        Random r=new Random();
+        for(int i=0;i<15;i++) {
+        	l.setLid(i);
+        	l.setBrand("Brand"+i);
+        	l.setPrice(r.nextInt(1000));
+        	session.save(l);
+        }
+        session.getTransaction().commit();
         session.close();
         
 
