@@ -27,9 +27,10 @@ public class App
         //SessionFactory sf=cfg.buildSessionFactory();
         SessionFactory sf=cfg.buildSessionFactory(sr);
         Session session=sf.openSession();
-        Laptop l=new Laptop();
+        
         Random r=new Random();
         for(int i=0;i<15;i++) {
+        	Laptop l=new Laptop();
         	l.setLid(i);
         	l.setBrand("Brand"+i);
         	l.setPrice(r.nextInt(1000));
