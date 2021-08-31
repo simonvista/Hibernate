@@ -28,29 +28,16 @@ public class App
         SessionFactory sf=cfg.buildSessionFactory(sr);
         Session session=sf.openSession();
         session.beginTransaction();
-//        Random r=new Random();
-//        for(int i=0;i<15;i++) {
-//        	Laptop l=new Laptop();
-//        	l.setLid(i);
-//        	l.setBrand("Brand"+i);
-//        	l.setPrice(r.nextInt(1000));
-//        	session.save(l);
-//        }
-//        enter transient state
-        Laptop l=new Laptop();        
-        l.setLid(17);
-        l.setBrand("HP");
-        l.setPrice(600);
-//        enter persistent state
-        session.save(l);
-//        990 will be final price
-        l.setPrice(590);		//l was saved in DB
-//        session.evict(l);		//l was not saved in DB
+        //get()
+        Laptop l=(Laptop) session.get(Laptop.class, 6);
+//        query was run even if l isn't used -> eager
+//        System.out.println(l);
+        //load()
+        Laptop l1=(Laptop) session.load(Laptop.class, 6);
+//        query was not run if l1 wasn't used -> lazy
+//        System.out.println(l1);
+        
         session.getTransaction().commit();
-//      enter detached state -> former method: detach()
-	      session.evict(l);		//l was not saved in DB
-	      l.setPrice(720);
-	      
         session.close();
         
 
