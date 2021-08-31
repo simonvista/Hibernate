@@ -55,11 +55,15 @@ public class App
 //        for(Object[] student:students) {
 //        	System.out.println(student[0]+", "+student[1]+", "+student[2]);
 //        }
-        Query q=session.createQuery("select rollno,name,marks from Student s where s.marks>10");
-        List<Object[]> students=(List<Object[]>) q.list();
-        for(Object[] student:students) {
-        	System.out.println(student[0]+", "+student[1]+", "+student[2]);
-        }
+//        Query q=session.createQuery("select rollno,name,marks from Student s where s.marks>10");
+//        List<Object[]> students=(List<Object[]>) q.list();
+//        for(Object[] student:students) {
+//        	System.out.println(student[0]+", "+student[1]+", "+student[2]);
+//        }
+        Query q=session.createQuery("select sum(marks) from Student s where s.marks>10");
+//        Object sumMarks=(Object) q.uniqueResult();
+        Long sumMarks=(Long) q.uniqueResult();
+        System.out.println(sumMarks);
         
         session.getTransaction().commit();
         session.close();
