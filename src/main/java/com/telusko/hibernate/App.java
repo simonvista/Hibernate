@@ -36,10 +36,12 @@ public class App
 //        }
 //        HQL
 //        Query q=session.createQuery("from Student");
-        Query q=session.createQuery("from Student where marks>14");
-        List<Student> students=q.list();
-        students.forEach(System.out::println);
-        
+//        Query q=session.createQuery("from Student where marks>14");
+//        List<Student> students=q.list();
+//        students.forEach(System.out::println);
+        Query q=session.createQuery("from Student where rollno=7");
+        Student s=(Student) q.uniqueResult();
+        System.out.println(s);
         
         session.getTransaction().commit();
         session.close();
