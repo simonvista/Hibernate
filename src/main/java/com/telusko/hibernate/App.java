@@ -35,9 +35,11 @@ public class App
 //        	session.save(s);
 //        }
 //        HQL
-        Query q=session.createQuery("from Student");
+//        Query q=session.createQuery("from Student");
+        Query q=session.createQuery("from Student where marks>14");
         List<Student> students=q.list();
         students.forEach(System.out::println);
+        
         
         session.getTransaction().commit();
         session.close();
