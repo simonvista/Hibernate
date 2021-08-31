@@ -50,7 +50,12 @@ public class App
 //        }
 //        System.out.println();
 //        System.out.println(student[0]+", "+student[1]+", "+student[2]);
-        Query q=session.createQuery("select rollno,name,marks from Student");
+//        Query q=session.createQuery("select rollno,name,marks from Student");
+//        List<Object[]> students=(List<Object[]>) q.list();
+//        for(Object[] student:students) {
+//        	System.out.println(student[0]+", "+student[1]+", "+student[2]);
+//        }
+        Query q=session.createQuery("select rollno,name,marks from Student s where s.marks>10");
         List<Object[]> students=(List<Object[]>) q.list();
         for(Object[] student:students) {
         	System.out.println(student[0]+", "+student[1]+", "+student[2]);
