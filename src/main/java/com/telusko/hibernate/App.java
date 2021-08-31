@@ -39,10 +39,17 @@ public class App
 //        Query q=session.createQuery("from Student where marks>14");
 //        List<Student> students=q.list();
 //        students.forEach(System.out::println);
-        Query q=session.createQuery("from Student where rollno=7");
-        Student s=(Student) q.uniqueResult();
-        System.out.println(s);
-        
+//        Query q=session.createQuery("from Student where rollno=7");
+//        Student s=(Student) q.uniqueResult();
+//        System.out.println(s);
+        Query q=session.createQuery("select rollno,name,marks from Student where rollno=7");
+//        select query -> Object[]
+        Object[] students=(Object[]) q.uniqueResult();
+        for(Object x:students) {
+        	System.out.print(x+", ");
+        }
+        System.out.println();
+        System.out.println(students[0]+", "+students[1]+", "+students[2]);
         session.getTransaction().commit();
         session.close();
         
