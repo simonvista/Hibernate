@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -26,47 +27,13 @@ public class App
         Session session=sf.openSession();
         //must begin transaction, otherwise no table created
         session.beginTransaction();
-//        Random r=new Random();
-//        for(int i=0;i<10;i++) {
-//        	Student s=new Student();
-//        	s.setRollno(i);
-//        	s.setName("Name"+i);
-//        	s.setMarks(r.nextInt(20));
-//        	session.save(s);
-//        }
-//        HQL
-//        Query q=session.createQuery("from Student");
-//        Query q=session.createQuery("from Student where marks>14");
-//        List<Student> students=q.list();
-//        students.forEach(System.out::println);
-//        Query q=session.createQuery("from Student where rollno=7");
-//        Student s=(Student) q.uniqueResult();
-//        System.out.println(s);
-//        Query q=session.createQuery("select rollno,name,marks from Student where rollno=7");
-//        select query -> Object[]
-//        Object[] student=(Object[]) q.uniqueResult();
-//        for(Object x:student) {
-//        	System.out.print(x+", ");
-//        }
-//        System.out.println();
-//        System.out.println(student[0]+", "+student[1]+", "+student[2]);
-//        Query q=session.createQuery("select rollno,name,marks from Student");
-//        List<Object[]> students=(List<Object[]>) q.list();
-//        for(Object[] student:students) {
-//        	System.out.println(student[0]+", "+student[1]+", "+student[2]);
-//        }
-//        Query q=session.createQuery("select rollno,name,marks from Student s where s.marks>10");
-//        List<Object[]> students=(List<Object[]>) q.list();
-//        for(Object[] student:students) {
-//        	System.out.println(student[0]+", "+student[1]+", "+student[2]);
-//        }
-        int m=10;
-        //Query q=session.createQuery("select sum(marks) from Student s where s.marks>"+m);
-        Query q=session.createQuery("select sum(marks) from Student s where s.marks> :m");
-        q.setParameter("m", m);
-//        Object sumMarks=(Object) q.uniqueResult();
-        Long sumMarks=(Long) q.uniqueResult();
-        System.out.println(sumMarks);
+        //SQL
+        SQLQuery query=session.createSQLQuery("select * from student where marks>10");
+        query.addEntity(Student.class);
+        List<Student> students=query.list();
+        for(Student s:students) {
+        	System.out.println(s);
+        }
         
         session.getTransaction().commit();
         session.close();
