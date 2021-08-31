@@ -29,14 +29,20 @@ public class App
         Session session=sf.openSession();
         session.beginTransaction();
         //get()
+//      query was run even if l isn't used -> obj, return null if not found        
         Laptop l=(Laptop) session.get(Laptop.class, 6);
-//        query was run even if l isn't used -> eager
-//        System.out.println(l);
+//      System.out.println(l);
         //load()
+//      query was not run if l1 wasn't used -> proxy obj, throw exception if not found        
         Laptop l1=(Laptop) session.load(Laptop.class, 6);
-//        query was not run if l1 wasn't used -> lazy
 //        System.out.println(l1);
-        
+        try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.out.println(l1);		//sop was called after 3s
         session.getTransaction().commit();
         session.close();
         
