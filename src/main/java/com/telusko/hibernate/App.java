@@ -27,15 +27,24 @@ public class App
         //SessionFactory sf=cfg.buildSessionFactory();
         SessionFactory sf=cfg.buildSessionFactory(sr);
         Session session=sf.openSession();
-        
-        Random r=new Random();
-        for(int i=0;i<15;i++) {
-        	Laptop l=new Laptop();
-        	l.setLid(i);
-        	l.setBrand("Brand"+i);
-        	l.setPrice(r.nextInt(1000));
-        	session.save(l);
-        }
+        session.beginTransaction();
+//        Random r=new Random();
+//        for(int i=0;i<15;i++) {
+//        	Laptop l=new Laptop();
+//        	l.setLid(i);
+//        	l.setBrand("Brand"+i);
+//        	l.setPrice(r.nextInt(1000));
+//        	session.save(l);
+//        }
+//        enter transient state
+        Laptop l=new Laptop();        
+        l.setLid(15);
+        l.setBrand("Lenova");
+        l.setPrice(900);
+//        enter persistent state
+        session.save(l);
+//        990 will be final price
+        l.setPrice(990);
         session.getTransaction().commit();
         session.close();
         
