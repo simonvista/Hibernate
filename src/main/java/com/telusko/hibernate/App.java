@@ -60,7 +60,10 @@ public class App
 //        for(Object[] student:students) {
 //        	System.out.println(student[0]+", "+student[1]+", "+student[2]);
 //        }
-        Query q=session.createQuery("select sum(marks) from Student s where s.marks>10");
+        int m=10;
+        //Query q=session.createQuery("select sum(marks) from Student s where s.marks>"+m);
+        Query q=session.createQuery("select sum(marks) from Student s where s.marks> :m");
+        q.setParameter("m", m);
 //        Object sumMarks=(Object) q.uniqueResult();
         Long sumMarks=(Long) q.uniqueResult();
         System.out.println(sumMarks);
