@@ -38,14 +38,19 @@ public class App
 //        }
 //        enter transient state
         Laptop l=new Laptop();        
-        l.setLid(15);
-        l.setBrand("Lenova");
-        l.setPrice(900);
+        l.setLid(17);
+        l.setBrand("HP");
+        l.setPrice(600);
 //        enter persistent state
         session.save(l);
 //        990 will be final price
-        l.setPrice(990);
+        l.setPrice(590);		//l was saved in DB
+//        session.evict(l);		//l was not saved in DB
         session.getTransaction().commit();
+//      enter detached state -> former method: detach()
+	      session.evict(l);		//l was not saved in DB
+	      l.setPrice(720);
+	      
         session.close();
         
 
