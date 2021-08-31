@@ -21,32 +21,15 @@ public class App
     {
 
         Configuration cfg=new Configuration().configure()	//hibernate.cfg.xml is default configure file         									 
-        									 .addAnnotatedClass(Student.class);        									 ;   
+        									 .addAnnotatedClass(Laptop.class);        									 ;   
         ServiceRegistry sr=new ServiceRegistryBuilder().applySettings(cfg.getProperties())
         											   .buildServiceRegistry();
         //SessionFactory sf=cfg.buildSessionFactory();
         SessionFactory sf=cfg.buildSessionFactory(sr);
         Session session=sf.openSession();
-        //must begin transaction, otherwise no table created
-        session.beginTransaction();
-        //SQL -> native query
-//        SQLQuery query=session.createSQLQuery("select * from student where marks>10");
-//        query.addEntity(Student.class);
-//        List<Student> students=query.list();
-//        for(Student s:students) {
-//        	System.out.println(s);
-//        }
-        SQLQuery query=session.createSQLQuery("select name,marks from student where marks>10");
-//        query.addEntity(Student.class);
-//        List<Student> students=query.list();
-        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-        List students=query.list();
-        for(Object s:students) {
-        	Map m=(Map) s;
-        	System.out.println(m.get("name")+", "+m.get("marks"));
-        }
         
-        session.getTransaction().commit();
+        
+//        session.getTransaction().commit();
         session.close();
         
 

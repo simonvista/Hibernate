@@ -15,8 +15,7 @@ public class Laptop {
 	private int lid;
 	private String brand;
 	private int price;	
-	@ManyToOne
-	private Alien alien;
+	
 	public int getLid() {
 		return lid;
 	}
@@ -35,15 +34,10 @@ public class Laptop {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public Alien getAlien() {
-		return alien;
-	}
-	public void setAlien(Alien alien) {
-		this.alien = alien;
-	}
 	@Override
 	public String toString() {
 		return "Laptop [lid=" + lid + ", brand=" + brand + ", price=" + price + "]";
-	}	
+	}
+	
 		
 }
